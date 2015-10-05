@@ -157,12 +157,9 @@ public class UploadFile extends HttpServlet {
 				List<FileItem> fileItems = fileItemsIterator.iterator().next().getValue();
 
 				FileItem fileItem = (FileItem) fileItems.get(0);
+
 				
-				System.out.println(fileItem);
-			
-				String item [] = fileItem.toString().split(",");
-				
-				File arquivoUploader = new File(item[1]);
+				File arquivoUploader = new File(buscarStoreLocation(fileItem));
 				
 				
 				arquivo = new File(
@@ -170,18 +167,6 @@ public class UploadFile extends HttpServlet {
 				
 				
 				arquivoUploader.renameTo(arquivo);
-				
-				//FileUtils.copyDirectory(fileItem, arquivo);
-				
-			//	arquivo.delete();
-				
-			//	if(arquivo.renameTo(cassino)){
-					
-			//		logger.info("foi");
-				//}
-				
-				arquivo.getAbsolutePath();
-				System.out.println("arquivo" + arquivo.getAbsolutePath());
 
 				elementos = false;
 			}
@@ -219,6 +204,15 @@ public class UploadFile extends HttpServlet {
 
 		request.getRequestDispatcher("listaReceita.jsp").forward(request, response);
 
+	}
+
+	public String buscarStoreLocation(FileItem fileItem){
+
+		String itemTemporario []  = fileItem.toString().split(",");
+
+		String item = itemTemporario[1].split("=");
+
+		return item[1];
 	}
 
 }
