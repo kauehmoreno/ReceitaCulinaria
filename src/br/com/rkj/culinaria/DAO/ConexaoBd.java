@@ -80,35 +80,40 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 		}
 	}
 	@Override
-	public HashMap<String, Receita> listarTodos() {
-		HashMap<String,Receita> receita = new HashMap<>();
-		List<Receita> culinaria = null;
+	public List<Receita> listarTodos() {
+		HashMap<String,String> receitaMap = new HashMap<>();
+		List<receitaMap> receitaList;
 		String query = "SELECT * FROM receita titulo_receita ORDER BY create_time;";
 		try {
 			this.resultSet = this.statement.executeQuery(query);
 			this.statement = (Statement) this.connection.createStatement();
 			
 			while(this.resultSet.next()){
-				
-				culinaria.add((Receita) this.resultSet);
-				receita.get(this.resultSet);
-				//receita.put("titulo", this.resultSet.getString("titulo_receita"));
-				//receita.put("descricao", this.resultSet.getString("descricao_receita"));
-				//receita.put("imagem", this.resultSet.getString("foto_receita"));
-				//receita.put("dataPub", this.resultSet.getTimestamp("create_time").toString());
+				receitaMap.put("titulo", this.resultSet.getString("titulo_receita"));
+				receitaMap.put("descricao", this.resultSet.getString("descricao_receita"));
+				receitaMap.put("imagem", this.resultSet.getString("foto_receita"));
+				receitaMap.put("dataPub", this.resultSet.getTimestamp("create_time").toString());
+
+				receitaList.add(this.resultSet);
 			}
 		} catch (SQLException e) {
 			Logger.getLogger(String.format("Nao foi possivel executar query para listar objetos", e));
 		}
 		
 		
-		return receita;
+		return receitaList;
 	}
+	/*
+	 * ResultSet retorna uma lista de objetos do banco, o qual temos uma lista de atributos representados 
+	 	por um hashmap com key e valeue para facilitar o acesso a esses atributos
+	 *
+	 */
 	@Override
-	public HashMap<String, Receita> search(String search) {
-		HashMap<String, Receita> receitaNomes = new HashMap<>();
-		
-		List<Receita> culinaria = null;
+	public List<Receita> search(String search) {
+		HashMap<String, String> receitaNomes = new HashMap<>();
+
+		List<receitaNomes> receitas; 
+
 		String query = "SELECT * FROM receita WHERE titulo_receita LIKE '%"+search+"%';";
 		
 		try{
@@ -116,23 +121,20 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 			this.statement = (Statement) this.connection.createStatement();
 			
 			while(this.resultSet.next()){
-				
-				 culinaria.add((Receita) this.resultSet);
-				 receitaNomes.get(this.resultSet);
-				 
-				 System.out.println("culinaria" + culinaria.listIterator().next());
-			//	receitaNomes.put("Receita", this.resultSet.)
-				//receitaNomes.put("titulo", this.resultSet.getString("titulo_receita"));
-				//receitaNomes.put("descricao", this.resultSet.getString("descricao_receita"));
-				//receitaNxomes.put("imagem", this.resultSet.getString("foto_receita"));
-				//receitaNomes.put("dataPub", this.resultSet.getTimestamp("create_time").toString());
+
+				receitaNomes.put("titulo", this.resultSet.getString("titulo_receita"));
+				receitaNomes.put("descricao", this.resultSet.getString("descricao_receita"));
+				receitaNomes.put("imagem", this.resultSet.getString("foto_receita"));
+				receitaNomes.put("dataPub", this.resultSet.getTimestamp("create_time").toString());
+
+				receitas.add(this.resultSet);
 			}
 		}catch(SQLException e){
 			logger.warning("Ouve um erro ao buscar os objetos:" + e);
 		}
 		
 		
-		return receitaNomes;
+		return receitas;
 	}
 	
 
