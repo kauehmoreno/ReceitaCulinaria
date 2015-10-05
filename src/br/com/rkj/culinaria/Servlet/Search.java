@@ -33,7 +33,6 @@ public class Search extends HttpServlet {
 
 		ConexaoBd<ReceitaSaving> conectar = new ConexaoBd<>();
 		HashMap<String, Receita> receitas = new HashMap<>();
-		//List<Receita> receita;
 
 		String search = request.getParameter("q");
 
