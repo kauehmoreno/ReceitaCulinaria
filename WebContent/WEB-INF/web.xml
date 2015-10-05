@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ReceitaSaving</display-name>
+    <servlet-name>ReceitaSaving</servlet-name>
+    <servlet-class>br.com.rkj.culinaria.utils.ReceitaSaving</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReceitaSaving</servlet-name>
+    <url-pattern>/receita</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Search</display-name>
+    <servlet-name>Search</servlet-name>
+    <servlet-class>br.com.rkj.culinaria.Servlet.Search</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>tempfile.dir</param-name>
+    <param-value>upload</param-value>
+  </context-param>
+  <listener>
+    <listener-class>br.com.rkj.culinaria.Servlet.ArquivoLocalizacao</listener-class>
+  </listener>
+  <servlet>
+    <display-name>UploadFile</display-name>
+    <servlet-name>UploadFile</servlet-name>
+    <servlet-class>br.com.rkj.culinaria.utils.UploadFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadFile</servlet-name>
+    <url-pattern>/uploadFile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadArquivo</servlet-name>
+    <jsp-file>/uploadArquivo.jsp</jsp-file>
+  </servlet>
+</web-app>
