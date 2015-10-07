@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import br.com.rkj.culinaria.utils.ReceitaSaving;
 
@@ -16,7 +17,7 @@ import br.com.rkj.culinaria.utils.ReceitaSaving;
  * @author kaueh
  *
  */
-//@WebListener
+@WebListener
 public class ArquivoLocalizacao implements ServletContextListener {
 
 	private static final Logger logger = Logger.getLogger(ReceitaSaving.class.getName());

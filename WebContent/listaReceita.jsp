@@ -30,17 +30,36 @@
 			</div>
 			</nav>
 			<%-- logica para listar receitas(foto,dataPub,titulo de descricao) --%>
-			<div class= "media">
-				<div class="media-left media-middle">
-    				<a href="#">
-				      <img class="media-object" src="..." alt="...">
-				    </a>
-				 </div>
-				 <div class="media-body">
-				    <h4 class="media-heading">Middle aligned media</h4>
-				    ...
-				 </div>
-			</div> 
+			<c:choose>
+				<c:when test="${not empty titulo}">
+					<div class="media col-md-12">
+						<div class="media-left media-middle">
+							<a href="#"> <img class="media-object" src="upload/${imagem}"
+								width="186" height="120">
+							</a>
+						</div>
+						<div class="media-body ">
+							<div class="col-md-12">${dataPub}</div>
+							<h4 class="media-heading col-md-12">${titulo }</h4>
+							<div class="col-md-4">${descricao}</div>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="page-header">
+								<h1>
+									Busque <small>por uma receita</small>
+								</h1>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</c:otherwise>
+
+			</c:choose>
 		</div>
 	</div>
 
