@@ -6,6 +6,7 @@ package br.com.rkj.culinaria;
 
 import java.io.Serializable;
 
+
 /**
  * @author kaueh
  *
@@ -21,22 +22,36 @@ public class Receita implements Serializable{
 	private String tituloReceita;
 	private String descricacaoReceita;
 	private String fotoReceita;
+	private String  dataPub;
 	
 	//construtores
 	public Receita(){
 		
 	}
-	public Receita(int id,String fotoId,String tituloReceita, String descricacaoReceita, String fotoReceita) {
+	public Receita(int id,String fotoId,String tituloReceita, String descricacaoReceita, String fotoReceita,String data) {
 		this.tituloReceita = tituloReceita;
 		this.descricacaoReceita = descricacaoReceita;
 		this.fotoReceita = fotoReceita;
 		this.fotoId = fotoId;
 		this.id = id;
+		this.dataPub = data;
 	}
 
 
 	//getters and setters
 	
+	/**
+	 * @return the dataPub
+	 */
+	public String getDataPub() {
+		return dataPub;
+	}
+	/**
+	 * @param dataPub the dataPub to set
+	 */
+	public void setDataPub(String dataPub) {
+		this.dataPub = dataPub;
+	}
 	/**
 	 * @return the fotoId
 	 */
