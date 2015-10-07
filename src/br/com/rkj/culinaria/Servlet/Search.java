@@ -1,7 +1,7 @@
 package br.com.rkj.culinaria.Servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.rkj.culinaria.Receita;
-import br.com.rkj.culinaria.DAO.ConexaoArquivo;
 import br.com.rkj.culinaria.DAO.ConexaoBd;
 import br.com.rkj.culinaria.utils.ReceitaSaving;
 
@@ -32,7 +31,8 @@ public class Search extends HttpServlet {
 			throws ServletException, IOException {
 
 		ConexaoBd<ReceitaSaving> conectar = new ConexaoBd<>();
-		HashMap<String, Receita> receitas = new HashMap<>();
+		Receita culinaria = new Receita();
+		List<Receita> receitas = new ArrayList<>();
 
 		String search = request.getParameter("q");
 
@@ -40,7 +40,7 @@ public class Search extends HttpServlet {
 			request.setAttribute("q", search);
 			try {
 				conectar.conexao();
-				receitas = conectar.search(search);
+				culinaria = conectar.search(search);
 
 			} catch (ClassNotFoundException e) {
 				logger.warning("Ocorreu um erro ao se conectar " + e);
@@ -52,16 +52,16 @@ public class Search extends HttpServlet {
 		}
 
 		conectar.desconectar();
-
-		request.setAttribute("titulo", receitas.get("titulo"));
-		request.setAttribute("descricao", receitas.get("descricao"));
-		request.setAttribute("imagem", receitas.get("imagem"));
-		request.setAttribute("dataPub", receitas.get("dataPub"));
 		
-		request.setAttribute("receitas", receitas);
+		String fotoNome [] = culinaria.getFotoReceita().split("/");
 		
+		request.setAttribute("titulo", culinaria.getTituloReceita());
+		request.setAttribute("descricao", culinaria.getDescricacaoReceita());
+		request.setAttribute("imagem",fotoNome[9]);
+		request.setAttribute("dataPub", culinaria.getDataPub());
 		
-
+		request.setAttribute("receita", culinaria);
+		
 		request.getRequestDispatcher("listaReceita.jsp").forward(request, response);
 	}
 
