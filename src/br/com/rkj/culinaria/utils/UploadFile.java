@@ -51,8 +51,6 @@ public class UploadFile extends HttpServlet {
 		 File filesDir = (File)
 		 getServletContext().getAttribute("FILES_DIR_FILE");
 
-		//File filesDir = new File(getServletContext().getRealPath("/"));
-
 		logger.info("Meu novo arquivo instanciado " + filesDir);
 
 		fileFactory.setRepository(filesDir);

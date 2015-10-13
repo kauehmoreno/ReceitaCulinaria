@@ -80,11 +80,14 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 			
 		}
 	}
+	/*
+	* retornar lista de objetos do banco 
+	*/
 	@Override
 	public List<Receita> listarTodos() {
 	
 		Receita culinaria = new Receita();
-		List<Receita> receitaList = new ArrayList<>();
+		List<Receita> receitaList;
 		String query = "SELECT * FROM receita titulo_receita ORDER BY create_time;";
 		try {
 			this.resultSet = this.statement.executeQuery(query);
@@ -105,7 +108,7 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 		}
 		
 		
-		return receitaList;
+		return culinaria;
 	}
 	/*
 	 * ResultSet retorna uma lista de objetos do banco, o qual temos uma lista de atributos representados 
@@ -115,8 +118,8 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 	@Override
 	public Receita search(String search) {
 		Receita culinaria = new Receita();
-
-		List<Receita> receitaList = new ArrayList<>(); 
+		
+		List<Receita> receitaList; 
 
 		String query = "SELECT * FROM receita WHERE titulo_receita LIKE '%"+search+"%';";
 		
