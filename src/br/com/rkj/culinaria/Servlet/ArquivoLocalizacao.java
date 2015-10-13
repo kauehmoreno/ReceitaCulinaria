@@ -22,7 +22,7 @@ public class ArquivoLocalizacao implements ServletContextListener {
 
 	private static final Logger logger = Logger.getLogger(ReceitaSaving.class.getName());
 	private static final String DIRETORIO_PROJETO = "/developer/EclipseProjects/";
-	private static final String DIRETORIO_INTO_PROJETO = "ReceitaCulinaria/WebContent/WEB-INF";
+	private static final String DIRETORIO_INTO_PROJETO = "ReceitaCulinaria/WebContent";
 	
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
