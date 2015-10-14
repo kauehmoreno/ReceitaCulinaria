@@ -50,9 +50,18 @@
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
 							<div class="page-header">
-								<h1>
-									Busque <small>por uma receita</small>
-								</h1>
+								<c:choose>
+									<c:when test="${not empty titulo }" >
+										<h1>
+											Busque <small>por uma receita</small>
+										</h1>
+									</c:when>
+									<c:otherwise>
+										<h1>
+											Por favor,busque <small>por uma receita valida </small>
+										</h1>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 						<div class="col-md-4"></div>
