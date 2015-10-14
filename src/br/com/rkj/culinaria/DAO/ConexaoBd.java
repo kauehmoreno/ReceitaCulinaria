@@ -87,7 +87,7 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 	public List<Receita> listarTodos() {
 	
 		Receita culinaria = new Receita();
-		List<Receita> receitaList;
+		List<Receita> receitaList = new ArrayList<>();
 		String query = "SELECT * FROM receita titulo_receita ORDER BY create_time;";
 		try {
 			this.resultSet = this.statement.executeQuery(query);
@@ -108,7 +108,7 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 		}
 		
 		
-		return culinaria;
+		return receitaList;
 	}
 	/*
 	 * ResultSet retorna uma lista de objetos do banco, o qual temos uma lista de atributos representados 
@@ -119,7 +119,7 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 	public Receita search(String search) {
 		Receita culinaria = new Receita();
 		
-		List<Receita> receitaList; 
+		List<Receita> receitaList = new ArrayList<>(); 
 
 		String query = "SELECT * FROM receita WHERE titulo_receita LIKE '%"+search+"%';";
 		
@@ -134,18 +134,26 @@ public class ConexaoBd<E> extends Factory<E>  implements DAO<E>{
 				culinaria.setFotoReceita(this.resultSet.getString("foto_receita"));
 				culinaria.setFotoId(this.resultSet.getString("id_foto"));
 				culinaria.setDataPub(this.resultSet.getTimestamp("create_time").toString());
-
-		
+				
+				
 			}
+			
+			
 			receitaList.add(culinaria);
 		}catch(SQLException e){
 			logger.warning("Ouve um erro ao buscar os objetos:" + e);
 		}
+			
+		return checkingemptyObject(culinaria);
+	}
+	
+	public Receita checkingemptyObject(Receita culinaria){
 		
+		if(culinaria == null){
+			return new Receita();
+		}
 		
 		return culinaria;
 	}
-	
-
 
 }
