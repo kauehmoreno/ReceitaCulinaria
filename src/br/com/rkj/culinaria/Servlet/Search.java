@@ -53,15 +53,20 @@ public class Search extends HttpServlet {
 
 		conectar.desconectar();
 		
-		String fotoNome [] = culinaria.getFotoReceita().split("/");
-		
-		request.setAttribute("titulo", culinaria.getTituloReceita());
-		request.setAttribute("descricao", culinaria.getDescricacaoReceita());
-		request.setAttribute("imagem",fotoNome[9]);
-		request.setAttribute("dataPub", culinaria.getDataPub());
-		
-		request.setAttribute("receita", culinaria);
-		
+		if(culinaria.getTituloReceita() != null){
+			
+			String fotoNome [] = culinaria.getFotoReceita().split("/");
+			
+			request.setAttribute("titulo", culinaria.getTituloReceita());
+			request.setAttribute("descricao", culinaria.getDescricacaoReceita());
+			request.setAttribute("imagem",fotoNome[9]);
+			request.setAttribute("dataPub", culinaria.getDataPub());
+			
+			request.setAttribute("receita", culinaria);
+			
+			request.getRequestDispatcher("listaReceita.jsp").forward(request, response);
+		}
+			request.setAttribute("titulo", culinaria.getTituloReceita() == null ? "" : culinaria.getTituloReceita());
 		request.getRequestDispatcher("listaReceita.jsp").forward(request, response);
 	}
 
